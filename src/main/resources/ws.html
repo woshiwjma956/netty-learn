@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ws</title>
+</head>
+<body>
+<script>
+    var socket;
+
+    window.onload = function (ev) {
+
+        if (window.WebSocket) {
+            // 如果浏览器支持ws
+            socket = new WebSocket("ws://localhost:7000/hello");
+
+            var resp = document.getElementById("resp");
+
+            socket.onmessage = function (ev) {
+                console.log(123)
+                var rt = document.getElementById("resp");
+                rt.value = rt.value + "\n" + ev.data;
+            }
+
+            socket.onopen = function (e) {
+                resp.value = "webSocket has connected";
+            }
+
+
+            socket.onclose = function (e) {
+                resp.value = resp.value + "\n" + "webSocket has disConnected"
+            }
+
+
+        } else {
+            alert("browser not support webSocket")
+        }
+
+        var form = document.getElementsByTagName("form");
+        form.onsubmit = function (e) {
+            e.preventDefault();
+        }
+
+        document.getElementById("clear").onclick = function (ev1) {
+            document.getElementById("resp").value = ""
+        }
+    }
+
+    function send(msg) {
+        if (socket) {
+            socket.send(msg);
+        }
+    }
+
+
+</script>
+<form action="/hello">
+    <textarea id="msg" style="height: 300px;width: 300px;"></textarea>
+    <input type="button" value="submit" onclick="send(document.getElementById('msg').value)">
+    <textarea id="resp" style="height: 300px;width:  300px;"></textarea>
+    <input id="clear" type="button" value="clear">
+</form>
+
+</body>
+</html>
