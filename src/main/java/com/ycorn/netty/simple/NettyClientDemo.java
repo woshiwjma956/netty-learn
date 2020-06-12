@@ -1,6 +1,5 @@
 package com.ycorn.netty.simple;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

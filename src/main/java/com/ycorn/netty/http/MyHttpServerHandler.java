@@ -1,6 +1,5 @@
 package com.ycorn.netty.http;
 
-import com.sun.jndi.toolkit.url.Uri;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
