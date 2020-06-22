@@ -19,10 +19,7 @@ public class ScatteringAndGatheringBufferDemo {
      * Gathering：从buffer读取数据时，可以采用buffer数组，依次读取
      */
     public static void main(String[] args) throws IOException {
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        InetSocketAddress inetSocketAddress = new InetSocketAddress(7777);
-        // 绑定端口
-        serverSocketChannel.socket().bind(inetSocketAddress);
+
 
         ByteBuffer[] byteBuffers = new ByteBuffer[2];
 
@@ -30,7 +27,10 @@ public class ScatteringAndGatheringBufferDemo {
         byteBuffers[1] = ByteBuffer.allocate(3);
 
         int messageLength = 8;
-
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(7777);
+        // 绑定端口
+        serverSocketChannel.socket().bind(inetSocketAddress);
         // 等待连接
         SocketChannel socketChannel = serverSocketChannel.accept();
 
