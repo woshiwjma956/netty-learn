@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    if ("WebSocket" in window) {
+        // 打开一个 web socket
+        var ws = new WebSocket("ws://localhost:4444/hello");
+
+        ws.onopen = function () {
+            // Web Socket 已连接上，使用 send() 方法发送数据
+            ws.send("连接WS成功");
+        };
+
+        ws.onmessage = function (evt) {
+            var content = document.getElementById("text").value
+            content = content + "\n" + evt.data
+            document.getElementById("text").value = content
+        };
+
+        ws.onclose = function () {
+            // 关闭 websocket
+            alert("连接已关闭...");
+        };
+    } else {
+        // 浏览器不支持 WebSocket
+        alert("您的浏览器不支持 WebSocket!");
+    }
+
+    function send() {
+        var text = document.getElementById("msg").value;
+        if (ws.readyState === WebSocket.OPEN) {
+            ws.send(text);
+        }
+        document.getElementById("msg").value = ""
+    }
+</script>
+<body>
+<form action=""></form>
+<input id="msg" type="text">
+<input id="btn" type="button" value="submit" onclick="send()">
+<textarea id="text" style="width: 300px"></textarea>
+</body>
+</html>
